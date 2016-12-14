@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class MainStates extends StateBasedGame {
@@ -35,8 +36,11 @@ public class MainStates extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer arg0) throws SlickException {
-		this.addState(new GameState());
-		this.addState(new GameOverState());
+		BasicGameState game = new GameState();
+		BasicGameState game2 = new GameOverState();
+		
+		this.addState(game);
+		this.addState(game2);
 	}
 
 }

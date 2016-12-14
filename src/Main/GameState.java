@@ -1,9 +1,12 @@
 package Main;
 
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
@@ -11,15 +14,14 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class GameState extends BasicGameState {
 
-	private final int MAZE_SIZE = 5;
+	private final int MAZE_SIZE = 2;
 	
-	private MainCharAnimation bunny;
 	private MainChar mage;
 	private Background bg;
 	private Maze maze;
 	private int[][] map;
-
-	Boolean moving = false;
+	private ArrayList<Integer> canCollide;
+	private Position pos;
 
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		Image set = new Image("images/walls1.png").getSubImage(0, 0, 192, 128);
@@ -32,11 +34,10 @@ public class GameState extends BasicGameState {
 		set = new Image("images/Mage.png");
 		//set.setFilter(Image.FILTER_LINEAR);
 		setScale = set.getScaledCopy(400, 100);
-		SpriteSheet mageSheet = new SpriteSheet(setScale,100,100);
 		
-		mage = new MainChar(mageSheet, MainStates.X_RES, MainStates.Y_RES, 100, 100);
+		mage = new MainChar(setScale, MainStates.X_RES, MainStates.Y_RES, 100, 100);
 		
-		bg = new Background(tiles, mage);
+		bg = new Background(tiles);
 
 		maze = new Maze(MAZE_SIZE);
 		map = maze.map();
@@ -47,17 +48,16 @@ public class GameState extends BasicGameState {
 		
 		bg.addTexture(setScale);
 		
+		pos = new Position (mage, map);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame arg1, int delta) throws SlickException {
-		bg.update(gc, delta, map, arg1);
-		mage.update(gc, delta, bg.getMoving());
+		pos.update(gc, arg1);
 		
 	}
 
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g) throws SlickException {
-		bg.render(gc, g, map);
-		mage.render(gc, g, bg.getDir());
+		pos.render(gc, g, bg, mage);
 		
 	}
 
