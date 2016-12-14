@@ -21,7 +21,6 @@ public class GameState extends BasicGameState {
 
 	Boolean moving = false;
 
-	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		Image set = new Image("images/walls1.png").getSubImage(0, 0, 192, 128);
 		set.setFilter(Image.FILTER_NEAREST);
@@ -50,14 +49,12 @@ public class GameState extends BasicGameState {
 		
 	}
 	
-	@Override
 	public void update(GameContainer gc, StateBasedGame arg1, int delta) throws SlickException {
 		bg.update(gc, delta, map, arg1);
 		mage.update(gc, delta, bg.getMoving());
 		
 	}
 
-	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g) throws SlickException {
 		bg.render(gc, g, map);
 		mage.render(gc, g, bg.getDir());
