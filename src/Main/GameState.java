@@ -52,7 +52,7 @@ public class GameState extends BasicGameState {
 	}
 	
 	public void update(GameContainer gc, StateBasedGame arg1, int delta) throws SlickException {
-		pos.update(gc, arg1);
+		pos.update(gc, arg1, bg, mage);
 		
 	}
 

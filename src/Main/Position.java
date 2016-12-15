@@ -50,10 +50,11 @@ public class Position {
 		return false;
 	}
 
-	public void update(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, Background bg, MainChar mage) throws SlickException {
 		Input input = gc.getInput();
 
+		mage.update(gc, sbg);
+		
 		if (moving == false) {
 			if (this.collision(map, 6, bunX, bunY)) {
 				sbg.enterState(1);
@@ -106,12 +107,13 @@ public class Position {
 				moving = false;
 			}
 		}
+
 	}
 
 	public void render(GameContainer gc, Graphics g, Background bg,
 			MainChar mage) throws SlickException {
 		bg.render(gc, g, map, x, y);
-		mage.render(gc, g, dir);
+		mage.render(gc, g, dir, this);
 
 	}
 }

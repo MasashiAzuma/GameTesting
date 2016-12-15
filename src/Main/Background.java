@@ -27,8 +27,6 @@ public class Background {
 		tileSet.add(target);
 	}
 
-
-
 	public void render(GameContainer gc, Graphics g, int[][] map, int x, int y) throws SlickException {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
